@@ -21,10 +21,14 @@ describe("About Applying What We Have Learnt", function() {
     var i,j,hasMushrooms, productsICanEat = [];
 
     for (i = 0; i < products.length; i+=1) {
-        if (products[i].containsNuts === false) {
+        var currentProduct = products[i];
+
+        if (currentProduct.containsNuts === false) {
             hasMushrooms = false;
-            for (j = 0; j < products[i].ingredients.length; j+=1) {
-               if (products[i].ingredients[j] === "mushrooms") {
+            for (j = 0; j < currentProduct.ingredients.length; j+=1) {
+               var currentIngredient = currentProduct.ingredients[j];
+
+               if (currentIngredient === "mushrooms") {
                   hasMushrooms = true;
                }
             }
@@ -38,10 +42,14 @@ describe("About Applying What We Have Learnt", function() {
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", function () {
 
       var productsICanEat = [];
-
+      productsICanEat = _.filter(products, function(product){
+        var notContainsMushrooms = product.ingredients.indexOf("mushrooms") === -1;
+        return !product.containsNuts && notContainsMushrooms;
+      });
+      console.log(productsICanEat);
       /* solve using filter() & all() / any() */
 
-      expect(productsICanEat.length).toBe(FILL_ME_IN);
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
@@ -49,13 +57,13 @@ describe("About Applying What We Have Learnt", function() {
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (imperative)", function () {
 
     var sum = 0;
-    for(var i=1; i<1000; i+=1) {
+    for(var i = 1; i < 1000; i += 1) {
       if (i % 3 === 0 || i % 5 === 0) {
         sum += i;
       }
     }
 
-    expect(sum).toBe(FILL_ME_IN);
+    expect(sum).toBe(233168);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
