@@ -43,8 +43,10 @@ describe("About Applying What We Have Learnt", function() {
 
       var productsICanEat = [];
       productsICanEat = _.filter(products, function(product){
+
         var notContainsMushrooms = product.ingredients.indexOf("mushrooms") === -1;
         return !product.containsNuts && notContainsMushrooms;
+
       });
       console.log(productsICanEat);
       /* solve using filter() & all() / any() */
@@ -68,9 +70,18 @@ describe("About Applying What We Have Learnt", function() {
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
+    var list = _.range(1, 1000);
+    var sumIfMultipleOfThreeOrFive = function(memo, num){
+        if (num % 3 === 0 || num % 5 === 0){
+          return memo + num;
+        }
+          return memo;
+        };
 
-    expect(233168).toBe(FILL_ME_IN);
+    var sum = _.reduce(list, sumIfMultipleOfThreeOrFive, 0);
+
+
+    expect(233168).toBe(sum);
   });
 
   /*********************************************************************************/
