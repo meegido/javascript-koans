@@ -100,27 +100,17 @@ describe("About Applying What We Have Learnt", function() {
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
-    var numberOfIngredients = _.chain(product)
-      .map(products, function(product){
-        for(i = 0; i < products.length; i+=1){
-          for(j = 0; j < products[i].ingredients.length; j+=1)
-
-        }
-      .flatten(currentProduct, currentIngredient)
-      .reduce(currentIngredient, function(memo, ingredient){
-        if (ingredient === true){
-          return memo + ingredientCount;
-        }
-        return memo;
-      }, 0)
-
-      .value();
-      })
-
+    var ingredients = _(products).chain()
+       .map(function(product) { return product.ingredients })
+       .flatten()
+       .reduce(function(memo, ingredient) {
+           memo[ingredient] = (memo[ingredient] || 0) + 1;
+           return memo;
+       }, ingredientCount).value();
 
     /* chain() together map(), flatten() and reduce() */
 
-    expect(ingredientCount['mushrooms']).toBe(ingredientCount);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
